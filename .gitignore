@@ -16,3 +16,6 @@ mn_counter.code-workspace
 
 # Ignorar logs e arquivos temporários
 *.log
+
+# Ignorar documentos que não devem ser versionados
+pseudocode.md
