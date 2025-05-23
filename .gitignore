@@ -1,21 +1,12 @@
-# Ignorar pastas e arquivos gerados pelo PyInstaller
+Aplicativo/
 dist/
 build/
 *.spec
-
-# Ignorar cache e arquivos compilados do Python
 __pycache__/
 *.pyc
 *.pyo
-
-# Ignorar arquivos de configuração do VS Code
 mn_counter.code-workspace
-
-# Ignorar arquivos de ambiente
 .env
-
-# Ignorar logs e arquivos temporários
+.venv
 *.log
-
-# Ignorar documentos que não devem ser versionados
 pseudocode.md
