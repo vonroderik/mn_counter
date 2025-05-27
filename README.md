@@ -38,9 +38,9 @@ Use os seguintes atalhos de teclado para marcar as células corretamente:
  5           NEC (Necrose)      
  6           AP (Apoptose)      
  7           IDNC (Indefinido)  
-TAB         Mostrar contagem parcial
-ESC         Abortar manualmente
-──────────────────────
+TAB         Mostrar contagem parcial  
+ESC         Abortar manualmente   
+──────────────────────  
 
 Limite total: o programa emite um **beep** e retorna ao menu automaticamente quando a soma de células com núcleo (M1, M2, M3, M4, IDNC) atingir **500 eventos**. NEC e AP não são considerados nesse limite.
 
@@ -61,8 +61,8 @@ Use os seguintes atalhos para marcar os danos celulares:
  W           MN (Micronúcleo)              
  E           NBUD (Nuclear Budding)        
  R           NPB (Nucleoplasmic Bridge)    
-TAB         Mostrar contagem parcial
-ESC         Abortar manualmente
+TAB         Mostrar contagem parcial  
+ESC         Abortar manualmente  
 ──────────────────────────────  
 
 Limite específico: ao atingir **1000 BN**, o programa emite um **beep** e retorna ao menu automaticamente.  
