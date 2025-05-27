@@ -1,0 +1,13 @@
+Aplicativo/
+dist/
+build/
+old/
+*.spec
+__pycache__/
+*.pyc
+*.pyo
+mn_counter.code-workspace
+.env
+.venv
+*.log
+pseudocode.md
