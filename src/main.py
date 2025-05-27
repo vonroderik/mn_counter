@@ -3,16 +3,22 @@ import sys
 import csv
 import threading
 import time
+
 try:
     import winsound
+
     def beep():
         winsound.Beep(750, 300)
+
 except ImportError:
+
     def beep():
-        print('\a', end='', flush=True)
+        print("\a", end="", flush=True)
+
 
 import keyboard
 from tabulate import tabulate
+
 
 # ----- Configuração de diretório de dados -----
 def get_data_dir():
@@ -24,6 +30,7 @@ def get_data_dir():
     os.makedirs(data_dir, exist_ok=True)
     return data_dir
 
+
 DATA_DIR = get_data_dir()
 CSV_FILES = {
     "nuclei": os.path.join(DATA_DIR, "nucleos.csv"),
@@ -31,6 +38,7 @@ CSV_FILES = {
 }
 
 # ----- Funções utilitárias -----
+
 
 def save_csv(path, lamina_id, header_keys, values):
     novo = not os.path.exists(path)
@@ -44,16 +52,18 @@ def save_csv(path, lamina_id, header_keys, values):
 def print_table(data_dict, title=None):
     if title:
         print(f"\n{title}")
-    print(tabulate(data_dict.items(), headers=["Tipo", "Quantidade"], tablefmt="fancy_grid"))
+    print(
+        tabulate(
+            data_dict.items(), headers=["Tipo", "Quantidade"], tablefmt="fancy_grid"
+        )
+    )
+
 
 # ----- Modo genérico de contagem -----
 
+
 def count_mode(
-    nome_modo: str,
-    key_map: dict,
-    limit_key: str,
-    limit_count: int,
-    csv_key: str
+    nome_modo: str, key_map: dict, limit_key: str, limit_count: int, csv_key: str
 ):
     keyboard.unhook_all()
     stop_event = threading.Event()
@@ -67,7 +77,7 @@ def count_mode(
     print("  'TAB' → mostrar contagem atual")
     print("  'ESC' → abortar manualmente\n")
 
-    tipos_com_nucleo = [k for k in key_map if k not in ("NEC", "AP")]
+    tipos_com_nucleo = [k for k in key_map if k not in ("NEC", "AP", "IDNC")]
 
     def total_nucleados():
         return sum(contagem[tipo] for tipo in tipos_com_nucleo)
@@ -85,10 +95,19 @@ def count_mode(
                 print(f"\nLimite de {limit_count} {limit_key} atingido!")
                 beep()
                 stop_event.set()
+
         return handler
 
     def mostrar_contagem(e=None):
         print_table(contagem, title=f"Contagem atual ({nome_modo})")
+
+        if limit_key is None:
+            # Modo núcleos: somar M1 a M4
+            total = sum(contagem[t] for t in ("M1", "M2", "M3", "M4") if t in contagem)
+            print(f">> Total de células nucleadas (M1–M4): {total}")
+        elif limit_key == "BN":
+            total = contagem.get("BN", 0)
+            print(f">> Total de células binucleadas (BN): {total}")
 
     for tipo, tecla in key_map.items():
         keyboard.on_press_key(tecla, make_handler(tipo))
@@ -100,15 +119,12 @@ def count_mode(
 
     keyboard.unhook_all()
     print_table(contagem, title=f"Resumo {nome_modo} - lâmina {lamina}")
-    save_csv(
-        CSV_FILES[csv_key],
-        lamina,
-        list(contagem.keys()),
-        list(contagem.values())
-    )
+    save_csv(CSV_FILES[csv_key], lamina, list(contagem.keys()), list(contagem.values()))
     print(f">> Dados salvos em {CSV_FILES[csv_key]}\n")
 
+
 # ----- Função de resumo geral -----
+
 
 def show_summary():
     for key, path in CSV_FILES.items():
@@ -126,7 +142,9 @@ def show_summary():
             print(tabulate(data, headers="firstrow", tablefmt="fancy_grid"))
     print()
 
+
 # ----- Menu principal -----
+
 
 def main():
     while True:
@@ -167,6 +185,7 @@ def main():
             sys.exit(0)
         else:
             print("Opção inválida, tente novamente.\n")
+
 
 if __name__ == "__main__":
     main()
