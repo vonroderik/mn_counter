@@ -2,6 +2,7 @@ Aplicativo/
 dist/
 build/
 old/
+data/
 *.spec
 __pycache__/
 *.pyc
