@@ -41,6 +41,7 @@ CSV_FILES = {
 
 # ----- Funções utilitárias -----
 
+
 def save_csv(path, lamina_id, header_keys, values):
     novo = not os.path.exists(path)
     with open(path, "a", newline="", encoding="utf-8") as f:
@@ -72,6 +73,7 @@ def limpar_buffer_teclado():
 
 
 # ----- Modo genérico de contagem -----
+
 
 def count_mode(
     nome_modo: str, key_map: dict, limit_key: str, limit_count: int, csv_key: str
@@ -135,6 +137,7 @@ def count_mode(
 
 # ----- Função de resumo geral -----
 
+
 def show_summary():
     for key, path in CSV_FILES.items():
         modo = "Núcleos" if key == "nuclei" else "Danos"
@@ -153,6 +156,7 @@ def show_summary():
 
 
 # ----- Menu principal -----
+
 
 def main():
     while True:
