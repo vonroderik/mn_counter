@@ -176,7 +176,7 @@ def main():
                     "IDNC": "7",
                 },
                 limit_key=None,
-                limit_count=10,
+                limit_count=500,
                 csv_key="nuclei",
             )
         elif escolha == "2":
