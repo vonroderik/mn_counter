@@ -3,6 +3,8 @@ import sys
 import csv
 import threading
 import time
+import msvcrt
+
 
 try:
     import winsound
@@ -59,9 +61,14 @@ def print_table(data_dict, title=None):
 
 
 def limpar_buffer_teclado():
+    # Aguarda o usuário soltar todas as teclas do sistema
     while any(keyboard.is_pressed(key) for key in keyboard._pressed_events):
         time.sleep(0.05)
-    time.sleep(0.2)
+    time.sleep(0.2)  # pausa para esvaziar buffer
+
+    # Limpa qualquer entrada residual no stdin
+    while msvcrt.kbhit():
+        msvcrt.getch()
 
 
 # ----- Modo genérico de contagem -----
@@ -169,7 +176,7 @@ def main():
                     "IDNC": "7",
                 },
                 limit_key=None,
-                limit_count=500,
+                limit_count=10,
                 csv_key="nuclei",
             )
         elif escolha == "2":
