@@ -39,7 +39,6 @@ CSV_FILES = {
 
 # ----- Funções utilitárias -----
 
-
 def save_csv(path, lamina_id, header_keys, values):
     novo = not os.path.exists(path)
     with open(path, "a", newline="", encoding="utf-8") as f:
@@ -59,8 +58,13 @@ def print_table(data_dict, title=None):
     )
 
 
-# ----- Modo genérico de contagem -----
+def limpar_buffer_teclado():
+    while any(keyboard.is_pressed(key) for key in keyboard._pressed_events):
+        time.sleep(0.05)
+    time.sleep(0.2)
 
+
+# ----- Modo genérico de contagem -----
 
 def count_mode(
     nome_modo: str, key_map: dict, limit_key: str, limit_count: int, csv_key: str
@@ -102,7 +106,6 @@ def count_mode(
         print_table(contagem, title=f"Contagem atual ({nome_modo})")
 
         if limit_key is None:
-            # Modo núcleos: somar M1 a M4
             total = sum(contagem[t] for t in ("M1", "M2", "M3", "M4") if t in contagem)
             print(f">> Total de células nucleadas (M1–M4): {total}")
         elif limit_key == "BN":
@@ -125,7 +128,6 @@ def count_mode(
 
 # ----- Função de resumo geral -----
 
-
 def show_summary():
     for key, path in CSV_FILES.items():
         modo = "Núcleos" if key == "nuclei" else "Danos"
@@ -145,7 +147,6 @@ def show_summary():
 
 # ----- Menu principal -----
 
-
 def main():
     while True:
         print("===== Menu Principal =====")
@@ -153,6 +154,7 @@ def main():
         print("2) Contagem de Danos")
         print("3) Resumo Geral")
         print("4) Sair")
+        limpar_buffer_teclado()
         escolha = input("Opção: ").strip()
         if escolha == "1":
             count_mode(
