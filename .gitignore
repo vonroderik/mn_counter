@@ -12,3 +12,4 @@ mn_counter.code-workspace
 .venv
 *.log
 pseudocode.md
+*.ruff_cache/

@@ -1,99 +1,112 @@
-MN Counter
-por Rodrigo Noronha de Mello
-https://github.com/vonroderik
+# MN Counter
 
-📌 Sobre o Projeto
-MN Counter é um programa em Python que facilita a contagem de células nucleadas (núcleos) e danos celulares em lâminas de análise. Utilizando atalhos de teclado, o usuário registra eventos rapidamente, com todos os dados salvos automaticamente em arquivos CSV dentro de uma pasta `data/`. Além disso, é possível consultar a contagem parcial a qualquer momento durante o processo.
+A CLI tool for high-throughput cytogenetic analysis and cell counting.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)](https://github.com/vonroderik)
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-lightgrey?style=for-the-badge)](https://github.com/vonroderik)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-🚀 Como Executar o Programa
+---
 
-Para rodar o MN Counter, basta clicar no arquivo executável MN_Counter.exe.
-Caso queira iniciar via terminal, siga os passos:
+## About the Project
 
-cd caminho/para/o/programa
-MN_Counter.exe
+**MN Counter** is a Python-based desktop application designed to streamline the workflow of cytogeneticists and biology researchers. It replaces traditional manual clickers with a keyboard-driven interface for counting nucleated cells and cellular anomalies (such as micronuclei).
 
-Após a execução, o programa exibirá um menu com as seguintes opções:  
-📌 1 - Contagem de Núcleos  
-📌 2 - Contagem de Danos  
-📌 3 - Resumo da Contagem  
-📌 4 - Sair  
+The application focuses on speed and data integrity, offering real-time statistical feedback, automated protocol limits, and persistent CSV data storage.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 
-🔬 Contagem de Núcleos
+## Core Features
 
-Selecione a opção 1 - Contagem de Núcleos e informe o ID da lâmina que deseja analisar.  
-Use os seguintes atalhos de teclado para marcar as células corretamente:  
+* **High-Throughput Logging:** Optimized keyboard shortcuts allow for rapid data entry without looking away from the microscope.
+* **Dual Analysis Modes:**
+    * **Nuclei Mode:** For counting mono-, bi-, tri-, and tetra-nucleated cells, including necrosis and apoptosis.
+    * **Damage Mode:** Specialized tracking for micronuclei (MN), nuclear buds (NBUD), and nucleoplasmic bridges (NPB).
+* **Automated Protocol Limits:** The system automatically pauses and alerts (audio/visual) when sample size targets are met (e.g., 500 nucleated cells or 1000 binucleated cells).
+* **Data Persistence:** All counts are automatically saved to structured `.csv` files in a local `data/` directory, preventing data loss.
+* **Real-Time Statistics:** Instant access to partial counts and summaries via hotkeys.
 
-──────────────────────  
- Tecla       Função               
-──────────────────────  
- 1           M1 (Mononuclear)   
- 2           M2 (Binuclear)     
- 3           M3 (Trinuclear)    
- 4           M4 (Tetranuclear)  
- 5           NEC (Necrose)      
- 6           AP (Apoptose)      
- 7           IDNC (Indefinido)  
-TAB         Mostrar contagem parcial  
-ESC         Abortar manualmente   
-──────────────────────  
+---
 
-Limite total: o programa emite um **beep** e retorna ao menu automaticamente quando a soma de células com núcleo (M1, M2, M3, M4, IDNC) atingir **500 eventos**. NEC e AP não são considerados nesse limite.
+## Technologies
 
-Para consultar a contagem parcial durante o processo, pressione **TAB**. Para abortar antes do limite, pressione **ESC**.  
-O resumo é salvo em `data/nucleos.csv`.  
+To build or run this project from source, you will need:
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+* **Python 3.10+**
+* **Libraries:**
+    * `keyboard` (Global hook events)
+    * `tabulate` (CLI data visualization)
+    * `winsound` (Windows-native audio feedback)
 
-🧬 Contagem de Danos  
+---
 
-Escolha a opção 2 - Contagem de Danos e insira o ID da lâmina.  
-Use os seguintes atalhos para marcar os danos celulares:  
+## How to Run
 
-──────────────────────────────  
- Tecla       Função                        
-──────────────────────────────  
- Q           BN (Binucleadas)              
- W           MN (Micronúcleo)              
- E           NBUD (Nuclear Budding)        
- R           NPB (Nucleoplasmic Bridge)    
-TAB         Mostrar contagem parcial  
-ESC         Abortar manualmente  
-──────────────────────────────  
+You can run the application either as a standalone executable or directly via the Python interpreter.
 
-Limite específico: ao atingir **1000 BN**, o programa emite um **beep** e retorna ao menu automaticamente.  
-Para consultar a contagem parcial durante o processo, pressione **TAB**. Para abortar antes do limite, pressione **ESC**.  
-O resumo é salvo em `data/danos.csv`.  
+### Option A: Standalone Executable
+Simply download and run `MN_Counter.exe`. No installation required.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+### Option B: Running from Source
 
-📊 Exibir Resumo Geral  
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/vonroderik/mn-counter.git](https://github.com/vonroderik/mn-counter.git)
+    cd mn-counter
+    ```
 
-Escolha a opção 3 - Resumo da Contagem para ver os dados registrados.  
-O programa acessará os arquivos CSV e os exibirá formatados, permitindo a revisão das contagens sem precisar abrir os arquivos manualmente.  
-Caso queira abrir os arquivos CSV, eles estarão na mesma pasta do executável (dentro da pasta `data/`).  
+2.  **Create a virtual environment (Recommended):**
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+    ```
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+3.  **Install dependencies:**
+    ```bash
+    pip install keyboard tabulate
+    ```
 
-❓ Possíveis Problemas e Soluções  
+4.  **Run the application:**
+    ```bash
+    python main.py
+    ```
 
-✅ Erro ao salvar CSV? → Verifique se o programa tem permissão para gravar na pasta.  
-✅ Executável não abre? → Teste rodar pelo terminal (cmd) e veja se há mensagens de erro.  
-✅ Teclas de atalho não funcionam? → Certifique-se de que o programa está rodando em um terminal compatível e com foco na janela.  
+---
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+## Operation Guide
 
-🛠 Tecnologias Utilizadas  
-✔ Python  
-✔ keyboard → Captura de teclas de atalho  
-✔ tabulate → Exibição formatada dos dados  
-✔ csv → Manipulação de arquivos  
-✔ PyInstaller → Conversão para executável  
+### 1. Nuclei Counting Mode
+**Goal:** Assess cell division status and cytotoxicity.  
+**Limit:** Stops automatically at **500** valid nucleated cells (M1-M4).
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+| Key | Event Code | Biological Description |
+|:---:|:----------:|:-----------------------|
+| `1` | **M1** | Mononuclear cell |
+| `2` | **M2** | Binuclear cell |
+| `3` | **M3** | Trinuclear cell |
+| `4` | **M4** | Tetranuclear cell |
+| `5` | **NEC** | Necrosis |
+| `6` | **AP** | Apoptosis |
+| `7` | **IDNC** | Indistinguishable/Undefined |
 
-*Última atualização: maio de 2025*
+### 2. Damage Counting Mode
+**Goal:** Quantify genotoxicity markers.  
+**Limit:** Stops automatically at **1000** Binucleated cells (BN).
+
+| Key | Event Code | Biological Description |
+|:---:|:----------:|:-----------------------|
+| `Q` | **BN** | Binucleated cell (Reference) |
+| `W` | **MN** | Micronucleus |
+| `E` | **NBUD** | Nuclear Bud |
+| `R` | **NPB** | Nucleoplasmic Bridge |
+
+**Global Hotkeys:**
+* `TAB`: Display current count summary.
+* `ESC`: Abort current session and return to menu.
+
+---
+
+## Project Structure
+
+The application maintains a simple directory structure for ease of use and portability.
