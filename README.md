@@ -43,12 +43,10 @@ To build or run this project from source, you will need:
 
 ## How to Run
 
-You can run the application either as a standalone executable or directly via the Python interpreter.
+You can run the application via the Python interpreter.
 
-### Option A: Standalone Executable
-Simply download and run `MN_Counter.exe`. No installation required.
 
-### Option B: Running from Source
+### Running from Source
 
 1.  **Clone the repository:**
     ```bash
